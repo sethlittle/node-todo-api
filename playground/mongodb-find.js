@@ -10,11 +10,12 @@ const {MongoClient, ObjectID} = require('mongodb');
 // var {name} = user;
 // console.log(name);
 
-MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
+MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, client) => {
   if(err) {
     return console.log('Unable to connect to MongoDB server');
   }
   console.log('Connected to MongoDB server');
+  const db = client.db('TodoApp');
 
 
 
@@ -40,7 +41,7 @@ db.collection('Users').find({name: 'Seth Little'}).toArray().then((docs) => {
   console.log('Unable to fetch Users', err);
 })
 
-  //db.close(); // loses connection
+  //client.close(); // loses connection
 }); // ES6 arrow function, and the TodoApp is created with this line, there are 2 arguments, error and db object - to read and write data
 //console.log(JSON.stringify(result.ops, undefined, 2));
 //_id: 123, // can manually select the id
